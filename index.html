@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -14,12 +14,27 @@
     }
 
     header {
+      position: relative;
       background: #007a3d;
       color: white;
       padding: 18px;
       text-align: center;
       font-size: 22px;
       font-weight: bold;
+    }
+
+    .btn-voltar {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      color: #007a3d;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     main {
@@ -51,6 +66,10 @@
 
     .card:hover {
       transform: scale(1.03);
+    }
+
+    .card:active {
+      transform: scale(0.98);
     }
 
     .imagem {
@@ -89,31 +108,56 @@
     .amarelo {
       color: #fbbc04;
     }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 18px;
+        padding: 16px;
+      }
+
+      .btn-voltar {
+        left: 10px;
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <header>Guardian</header>
+  <header>
+    <button class="btn-voltar" onclick="voltarTela()">← Voltar</button>
+    Guardian
+  </header>
 
   <main>
     <h1>Qual o comportamento você gostaria de registrar?</h1>
 
     <div class="opcoes">
 
-      <div class="card" onclick="selecionar('Comportamento Seguro')">
-        <div class="imagem verde">👥</div>
-        <div class="texto">
-          <span>Cadastrar</span>
-          <strong>Comportamento Seguro</strong>
-        </div>
-      </div>
-
       <div class="card" onclick="selecionar('Comportamento de Risco')">
         <div class="imagem laranja">⚠️</div>
         <div class="texto">
           <span>Cadastrar</span>
           <strong>Comportamento de Risco</strong>
+        </div>
+      </div>
+
+      <div class="card" onclick="selecionar('Comportamento Seguro')">
+        <div class="imagem verde">👥</div>
+        <div class="texto">
+          <span>Cadastrar</span>
+          <strong>Comportamento Seguro</strong>
         </div>
       </div>
 
@@ -130,7 +174,14 @@
 
   <script>
     function selecionar(tipo) {
-      alert("Você selecionou: " + tipo);
+      localStorage.setItem("tipoRegistro", tipo);
+
+      // Altere aqui para o nome da próxima tela
+      window.location.href = "formulario.html";
+    }
+
+    function voltarTela() {
+      window.history.back();
     }
   </script>
 
